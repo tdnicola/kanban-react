@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Column from './Column'
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [columns, setColumns] = useState(
+      [
+        {
+          name: 'Have not started',
+          cards: [
+            { name: 'card a'}
+          ]
+        },
+        {
+          name: 'inProgress',
+          cards: [
+            { name: 'card b'}
+          ]
+        },
+        {
+          name: 'completed',
+          cards: [
+            { name: 'card c'}
+          ]
+        },
+      ] 
+    )
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        columns.map((column, columnIndex) => (
+          <Column column={column}
+          columnIndex={columnIndex}
+          key={columnIndex} 
+        />
+      ))
+      }
     </div>
   );
 }
