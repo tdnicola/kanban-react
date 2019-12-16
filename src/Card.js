@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 
-export default ({card}) => (
-    <div className='card'>
-        {card.name}
+export default ({
+    card,
+    onDragStart,
+}) => (
+    <div className='card' 
+        draggable
+        onDragStart={(e) => onDragStart(e, card.name)}
+    >
+        <span className="title">{card.name}</span>
+
     </div>
 )
 

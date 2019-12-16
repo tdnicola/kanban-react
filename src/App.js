@@ -14,13 +14,13 @@ function App() {
           ]
         },
         {
-          name: 'inProgress',
+          name: 'InProgress',
           cards: [
             { name: 'card b'}
           ]
         },
         {
-          name: 'completed',
+          name: 'Completed',
           cards: [
             { name: 'card c'}
           ]
@@ -28,15 +28,32 @@ function App() {
       ] 
     )
 
+
+    function onDragStart (e, id) {
+      console.log('dragstart', id)
+      e.dataTransfer.setData('id', id)
+    }
+
+    function onDragOver (e) {
+      e.preventDefault()
+    }
+
+    function onDrop(e, column) {
+      let id = e.dataTransfer.getData('id')
+    }
+
   return (
     <div className="App">
-      {
-        columns.map((column, columnIndex) => (
-          <Column column={column}
-          columnIndex={columnIndex}
-          key={columnIndex} 
-        />
-      ))
+      {columns.map((column, columnIndex) => (
+          <Column 
+            onDrop={(e) => onDrop(e, column.name)}
+            column={column}
+            columnIndex={columnIndex}
+            key={columnIndex} 
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+          />
+        ))
       }
     </div>
   );
