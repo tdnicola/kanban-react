@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Column from './Column'
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -35,6 +34,7 @@ function App() {
       // console.log('dragstart', id, "card index:" + cardIndex)
       e.dataTransfer.setData('id', id)
       e.dataTransfer.setData('cardIndex', cardIndex)
+      e.dataTransfer.setData('startingColumnIndex', columnIndex)
       console.log("start ColumnIndex:" + columnIndex)
 
     }
@@ -43,40 +43,29 @@ function App() {
       e.preventDefault()
     }
 
-    function onDrop(e, column, columnIndex) {
+    function onDrop(e, column, endingColumnIndex) {
       let id = e.dataTransfer.getData('id');
       let cardIndex = e.dataTransfer.getData('cardIndex')
+      let startingColumnIndex = e.dataTransfer.getData('startingColumnIndex')
 
+      let newCard = columns[startingColumnIndex].cards
+      console.log(newCard[cardIndex])
 
-    //   for (let i = 0; i < columns.length; i++) {
-    //     // get the size of the inner array
-    //     var innerArrayLength = columns[i].cards.length;
-    //     // loop the inner array
-    //     for (var j = 0; j < innerArrayLength; j++) {
-    //         // console.log('[' + i + ',' + j + '] = ' + columns[i].cards[j].name);
-    //         if(columns[i].cards[j].name === id) {
-    //               // console.log(columns[i].cards[j])
-    //               //  setColumns({
-    //               //    ...columns,
-    //               //    id
-    //               //  })                  
-    //             }
-    //     }
-    // }
+      let task = {
+        name: id,
+        key: id,
+        cardIndex: cardIndex
+      }
 
+      newCard.splice(cardIndex, 1)
+      columns[endingColumnIndex].cards.push(task)
 
-    // const card = columns[columnIndex].cards.splice(cardIndex)
-    // columns[columnIndex].cards.push(card)
-    // return columns 
-
-      //  setColumns([
-      //     ...columns,
-      //     id
-      //  ])  
-
+      setColumns([
+        ...columns,
+      ])  
 
       //columnIndex is the column it's dropped on
-      console.log('HELLO', id, column, "columnIndex:" + columnIndex)
+      console.log(id, column, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
     }
 
   return (
