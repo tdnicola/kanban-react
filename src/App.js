@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Column from './Column'
+import NewTask from './NewTask'
 import './App.css';
 
 function App() {
@@ -28,7 +29,13 @@ function App() {
         },
       ] 
     )
+    const [addNew, setAddNew] = useState(false)
 
+
+    function onAddClick(e) {
+      e.preventDefault()
+      setAddNew(!addNew)
+    }
 
     function onDragStart (e, id, cardIndex, columnIndex) {
       // console.log('dragstart', id, "card index:" + cardIndex)
@@ -70,17 +77,24 @@ function App() {
 
   return (
     <div className="App">
-      {columns.map((column, columnIndex) => (
-          <Column 
-            onDrop={onDrop}
-            column={column}
-            columnIndex={columnIndex}
-            key={columnIndex} 
-            onDragStart={onDragStart}
-            onDragOver={onDragOver}
-          />
-        ))
-      }
+      <NewTask 
+        onAddClick={onAddClick}
+        addNew={addNew}
+        setAddNew={setAddNew}
+      />
+      <div className='columnGrid'>
+        {columns.map((column, columnIndex) => (
+            <Column 
+              onDrop={onDrop}
+              column={column}
+              columnIndex={columnIndex}
+              key={columnIndex} 
+              onDragStart={onDragStart}
+              onDragOver={onDragOver}
+            />
+          ))
+        }
+        </div>
     </div>
   );
 }
