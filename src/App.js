@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Column from './Column'
 import NewTask from './NewTask'
 import './App.css';
@@ -32,12 +32,12 @@ function App() {
     const [addNew, setAddNew] = useState(false)
 
 
-    function onAddClick(e) {
+    const toggleModalAddClick = (e) => {
       e.preventDefault()
       setAddNew(!addNew)
     }
 
-    function onDragStart (e, id, cardIndex, columnIndex) {
+    const onDragStart = (e, id, cardIndex, columnIndex) => {
       // console.log('dragstart', id, "card index:" + cardIndex)
       e.dataTransfer.setData('id', id)
       e.dataTransfer.setData('cardIndex', cardIndex)
@@ -46,17 +46,34 @@ function App() {
 
     }
 
-    function onDragOver (e) {
+    const onDragOver = (e) => {
       e.preventDefault()
     }
 
-    function onDrop(e, column, endingColumnIndex) {
+    const createNewTask = (e) => {
+      e.preventDefault()
+
+      setColumns([
+        ...columns,
+      ])  
+
+      let task = {
+        name: e.target.value,
+        key: e.target.value,
+      }
+      console.log(this)
+      columns[0].cards.push(task)
+      toggleModalAddClick(e)
+
+    }
+
+    const onDrop = (e, column, endingColumnIndex) => {
       let id = e.dataTransfer.getData('id');
       let cardIndex = e.dataTransfer.getData('cardIndex')
       let startingColumnIndex = e.dataTransfer.getData('startingColumnIndex')
 
       let newCard = columns[startingColumnIndex].cards
-      console.log(newCard[cardIndex])
+      // console.log(newCard[cardIndex])
 
       let task = {
         name: id,
@@ -72,15 +89,16 @@ function App() {
       ])  
 
       //columnIndex is the column it's dropped on
-      console.log(id, column, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
+      // console.log(id, column, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
     }
 
   return (
     <div className="App">
       <NewTask 
-        onAddClick={onAddClick}
+        toggleModalAddClick={toggleModalAddClick}
         addNew={addNew}
         setAddNew={setAddNew}
+        createNewTask={createNewTask}
       />
       <div className='columnGrid'>
         {columns.map((column, columnIndex) => (
