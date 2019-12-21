@@ -30,6 +30,8 @@ function App() {
       ] 
     )
     const [addNew, setAddNew] = useState(false)
+    const [input, setInput] = useState('')
+
 
 
     const toggleModalAddClick = (e) => {
@@ -50,21 +52,18 @@ function App() {
       e.preventDefault()
     }
 
+    const onChange = (e) => {
+      setInput(e.currentTarget.value);
+  }
     const createNewTask = (e) => {
       e.preventDefault()
 
-      setColumns([
-        ...columns,
-      ])  
-
       let task = {
-        name: e.target.value,
-        key: e.target.value,
+        name: input,
+        key: input,
       }
-      console.log(this)
       columns[0].cards.push(task)
       toggleModalAddClick(e)
-
     }
 
     const onDrop = (e, column, endingColumnIndex) => {
@@ -99,6 +98,7 @@ function App() {
         addNew={addNew}
         setAddNew={setAddNew}
         createNewTask={createNewTask}
+        onChange={onChange}
       />
       <div className='columnGrid'>
         {columns.map((column, columnIndex) => (

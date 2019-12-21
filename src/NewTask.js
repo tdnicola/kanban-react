@@ -8,7 +8,8 @@ export default ({
     toggleModalAddClick,
     addNew,
     setAddNew,
-    createNewTask
+    createNewTask,
+    onChange
 }) => (
 
     <div className='addTask'>
@@ -21,7 +22,7 @@ export default ({
                 <div className='modal'> 
                     <div className='modal-main'>
                         testing
-                        <input value={console.log(this)} placeholder='New Task'></input>
+                        <input onChange={onChange}placeholder='New Task'></input>
                         <button onClick={e => createNewTask(e)}>Add New Task</button>
                         <button onClick={e => toggleModalAddClick(e)}>Close</button>
 
