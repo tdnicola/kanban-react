@@ -1,6 +1,8 @@
-import React, { useState, useRef } from 'react';
-import Column from './Column'
-import NewTask from './NewTask'
+import React, { useState } from 'react';
+import Column from './components/Column'
+import NewTask from './components/NewTask'
+import LoginView from './components/LoginView'
+
 import './App.css';
 
 function App() {
@@ -29,16 +31,23 @@ function App() {
         },
       ] 
     )
-    const [addNew, setAddNew] = useState(false)
+    
+    const [loginView, setLoginView] = useState(false)
+    const [addNewTaskModal, setaddNewTaskModal] = useState(false)
     const [input, setInput] = useState('')
-
-
+    
 
     const toggleModalAddClick = (e) => {
       e.preventDefault()
-      setAddNew(!addNew)
+      setaddNewTaskModal(!addNewTaskModal)
     }
 
+    const toggleLogin = (e) => {
+      e.preventDefault()
+      setLoginView(!loginView)
+    }
+
+    //starting to drag the task
     const onDragStart = (e, id, cardIndex, columnIndex) => {
       // console.log('dragstart', id, "card index:" + cardIndex)
       e.dataTransfer.setData('id', id)
@@ -52,9 +61,12 @@ function App() {
       e.preventDefault()
     }
 
+    //setting input state through NewTask.js to go through createNewTask below
     const onChange = (e) => {
       setInput(e.currentTarget.value);
   }
+
+    // inputting new task, takes onChange above
     const createNewTask = (e) => {
       e.preventDefault()
 
@@ -66,7 +78,8 @@ function App() {
       toggleModalAddClick(e)
     }
 
-    const onDrop = (e, column, endingColumnIndex) => {
+    //Dropping the draggable task to a different column pushing/splicing task
+    const onDrop = (e, columnName, endingColumnIndex) => {
       let id = e.dataTransfer.getData('id');
       let cardIndex = e.dataTransfer.getData('cardIndex')
       let startingColumnIndex = e.dataTransfer.getData('startingColumnIndex')
@@ -88,31 +101,43 @@ function App() {
       ])  
 
       //columnIndex is the column it's dropped on
-      // console.log(id, column, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
+      console.log(id, columnName, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
     }
 
   return (
     <div className="App">
-      <NewTask 
-        toggleModalAddClick={toggleModalAddClick}
-        addNew={addNew}
-        setAddNew={setAddNew}
-        createNewTask={createNewTask}
-        onChange={onChange}
-      />
-      <div className='columnGrid'>
-        {columns.map((column, columnIndex) => (
-            <Column 
-              onDrop={onDrop}
-              column={column}
-              columnIndex={columnIndex}
-              key={columnIndex} 
-              onDragStart={onDragStart}
-              onDragOver={onDragOver}
+      {!loginView && (
+              <LoginView 
+              loginView={loginView}
+              toggleLogin={toggleLogin}
             />
-          ))
-        }
+      )}
+
+      {loginView && (
+        <div className='loggedIn'>
+              <NewTask 
+                toggleModalAddClick={toggleModalAddClick}
+                addNewTaskModal={addNewTaskModal}
+                setaddNewTaskModal={setaddNewTaskModal}
+                createNewTask={createNewTask}
+                onChange={onChange}
+              />
+              <div className='columnGrid'>
+                {columns.map((column, columnIndex) => (
+                    <Column 
+                      onDrop={onDrop}
+                      column={column}
+                      columnIndex={columnIndex}
+                      key={columnIndex} 
+                      onDragStart={onDragStart}
+                      onDragOver={onDragOver}
+                    />
+                  ))
+                }
+              </div>
         </div>
+
+        )}
     </div>
   );
 }

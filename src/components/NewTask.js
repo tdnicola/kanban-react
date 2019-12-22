@@ -1,13 +1,8 @@
-import React, { useState, } from 'react';
-import Column from './Column'
-import './App.css';
-
-
+import React from 'react';
 
 export default ({ 
     toggleModalAddClick,
-    addNew,
-    setAddNew,
+    addNewTaskModal,
     createNewTask,
     onChange
 }) => (
@@ -18,11 +13,11 @@ export default ({
         </button>
         <div className="newTasks">
 
-            {addNew && (
+            {addNewTaskModal && (
                 <div className='modal'> 
                     <div className='modal-main'>
                         testing
-                        <input onChange={onChange}placeholder='New Task'></input>
+                        <input onChange={onChange} placeholder='New Task'></input>
                         <button onClick={e => createNewTask(e)}>Add New Task</button>
                         <button onClick={e => toggleModalAddClick(e)}>Close</button>
 
