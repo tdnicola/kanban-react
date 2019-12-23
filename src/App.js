@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Column from './components/Column'
-import NewTask from './components/NewTask'
-import LoginView from './components/LoginView'
+import Column from './components/Column';
+import NewTask from './components/NewTask';
+import LoginView from './components/LoginView';
+import NewColumn from './components/NewColumn';
 
 import './App.css';
 
@@ -35,6 +36,8 @@ function App() {
     const [loginView, setLoginView] = useState(false)
     const [registrationView, setRegistrationView] = useState(false)
     const [addNewTaskModal, setaddNewTaskModal] = useState(false)
+    const [addNewColumnModal, setaddNewColumnModal] = useState(false)
+
     const [input, setInput] = useState('')
     
 
@@ -84,6 +87,19 @@ function App() {
       toggleModalAddClick(e)
     }
 
+    const createNewColumn =(e) => {
+
+    }
+
+    const deleteColumn =(e) => {
+      
+    }
+
+    const toggleAddColumn = (e) => {
+      e.preventDefault()
+      setaddNewColumnModal(!addNewColumnModal)
+    }
+
     //Dropping the draggable task to a different column pushing/splicing task
     const onDrop = (e, columnName, endingColumnIndex) => {
       let id = e.dataTransfer.getData('id');
@@ -105,9 +121,6 @@ function App() {
       setColumns([
         ...columns,
       ])  
-
-      //columnIndex is the column it's dropped on
-      console.log(id, columnName, "endingcolumnIndex:" + endingColumnIndex, 'startingColumn:' + startingColumnIndex, "cardIndex:" + cardIndex)
     }
 
   return (
@@ -133,6 +146,10 @@ function App() {
                 createNewTask={createNewTask}
                 onChange={onChange}
               />
+              <NewColumn
+                toggleAddColumn={toggleAddColumn}
+                addNewColumnModal={addNewColumnModal}
+              />
               <div className='columnGrid'>
                 {columns.map((column, columnIndex) => (
                     <Column 
@@ -142,13 +159,20 @@ function App() {
                       key={columnIndex} 
                       onDragStart={onDragStart}
                       onDragOver={onDragOver}
+                      toggleModalAddClick={toggleModalAddClick}
                     />
                   ))
                 }
               </div>
+              <button
+                onClick={(e) => toggleAddColumn(e)}
+              >
+                Add Column
+              </button>
+
         </div>
 
-        )}
+      )}
     </div>
   );
 }

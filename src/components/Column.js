@@ -6,14 +6,20 @@ export default ({
     columnIndex,
     onDragStart,
     onDragOver,
-    onDrop
+    onDrop,
  }) => (
     <div 
         className='column' 
         onDragOver={(e) => onDragOver(e)}
         onDrop={(e) => onDrop(e, column.name, columnIndex)}
     >
-        <h2>{column.name}</h2>
+        <h2>
+            {column.name}
+            <button>
+                X
+            </button>
+
+        </h2>
         {column.cards.map((card, cardIndex) => (
             <Card
                 card={card}
