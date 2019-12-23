@@ -13,7 +13,7 @@ export default ({
         onDragOver={(e) => onDragOver(e)}
         onDrop={(e) => onDrop(e, column.name, columnIndex)}
     >
-        <h1>{column.name}</h1>
+        <h2>{column.name}</h2>
         {column.cards.map((card, cardIndex) => (
             <Card
                 card={card}

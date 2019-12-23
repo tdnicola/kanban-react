@@ -106,6 +106,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1>The Kanban Board!</h1>
+      
       {!loginView && (
               <LoginView 
               loginView={loginView}
