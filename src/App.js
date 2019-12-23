@@ -33,6 +33,7 @@ function App() {
     )
     
     const [loginView, setLoginView] = useState(false)
+    const [registrationView, setRegistrationView] = useState(false)
     const [addNewTaskModal, setaddNewTaskModal] = useState(false)
     const [input, setInput] = useState('')
     
@@ -45,6 +46,11 @@ function App() {
     const toggleLogin = (e) => {
       e.preventDefault()
       setLoginView(!loginView)
+    }
+
+    const toggleRegistrationView = (e) => {
+      e.preventDefault();
+      setRegistrationView(!registrationView)
     }
 
     //starting to drag the task
@@ -112,6 +118,9 @@ function App() {
               <LoginView 
               loginView={loginView}
               toggleLogin={toggleLogin}
+              registrationView={registrationView}
+              setRegistrationView={setRegistrationView}
+              toggleRegistrationView={toggleRegistrationView}
             />
       )}
 
