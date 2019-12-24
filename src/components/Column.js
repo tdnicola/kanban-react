@@ -10,9 +10,6 @@ export default ({
     onDrop,
     deleteColumn,
     createNewTask,
-    toggleModalAddTaskClick,
-    addNewTaskModal,
-    setaddNewTaskModal,
     onChange,
     input,
     deleteTask,
@@ -35,19 +32,13 @@ export default ({
                 onDragStart={onDragStart}
                 key={card.name}
                 deleteTask={deleteTask}
-
             />
         ))}
         
         <NewTask 
-            toggleModalAddTaskClick={toggleModalAddTaskClick}
-            addNewTaskModal={addNewTaskModal}
-            setaddNewTaskModal={setaddNewTaskModal}
             createNewTask={createNewTask}
             onChange={onChange}
             columnIndex={columnIndex}
-            column={column}
-            key={column}
             input={input}
         />
     </div>

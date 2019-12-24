@@ -69,6 +69,7 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,.4);
   padding: 10px;
   margin: 10px;
+  border-radius: 10px;
 }
 
 .card span {
@@ -103,6 +104,14 @@ body {
 
 .informationView {
   width: 40%;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: grey;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .loginView {

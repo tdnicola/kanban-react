@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Column from './components/Column';
-import NewTask from './components/NewTask';
 import LoginView from './components/LoginView';
 import NewColumn from './components/NewColumn';
 
@@ -33,7 +32,7 @@ function App() {
       ] 
     )
     
-    const [loginView, setLoginView] = useState(true)
+    const [loginView, setLoginView] = useState(false)
     const [registrationView, setRegistrationView] = useState(false)
     const [addNewTaskModal, setaddNewTaskModal] = useState(false)
     const [addNewColumnModal, setaddNewColumnModal] = useState(false)
@@ -156,23 +155,15 @@ function App() {
       
       {!loginView && (
               <LoginView 
-              loginView={loginView}
               toggleLogin={toggleLogin}
               registrationView={registrationView}
-              setRegistrationView={setRegistrationView}
               toggleRegistrationView={toggleRegistrationView}
             />
       )}
 
       {loginView && (
         <div className='loggedIn'>
-              {/* <NewTask 
-                toggleModalAddTaskClick={toggleModalAddTaskClick}
-                addNewTaskModal={addNewTaskModal}
-                setaddNewTaskModal={setaddNewTaskModal}
-                createNewTask={createNewTask}
-                onChange={onChange}
-              /> */}
+
               <NewColumn
                 toggleAddColumn={toggleAddColumn}
                 addNewColumnModal={addNewColumnModal}
@@ -185,14 +176,11 @@ function App() {
                       onDrop={onDrop}
                       column={column}
                       columnIndex={columnIndex}
-                      key={columnIndex} 
                       onDragStart={onDragStart}
                       onDragOver={onDragOver}
                       toggleModalAddTaskClick={toggleModalAddTaskClick}
                       deleteColumn={deleteColumn}
                       createNewTask={createNewTask}
-                      addNewTaskModal={addNewTaskModal}
-                      setaddNewTaskModal={setaddNewTaskModal}
                       onChange={onChange}
                       input={input}
                       deleteTask={deleteTask}

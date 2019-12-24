@@ -2,10 +2,8 @@ import React from 'react';
 import RegistrationView from './RegistrationView';
 
 export default ({ 
-    loginView,
     toggleLogin,
     registrationView,
-    setRegistrationView,
     toggleRegistrationView
 }) => (
 
