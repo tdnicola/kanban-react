@@ -14,6 +14,7 @@ export default ({
     addNewTaskModal,
     setaddNewTaskModal,
     onChange,
+    input,
  }) => (
     <div 
         className='column' 
@@ -44,6 +45,7 @@ export default ({
             columnIndex={columnIndex}
             column={column}
             key={column}
+            input={input}
         />
     </div>
 )

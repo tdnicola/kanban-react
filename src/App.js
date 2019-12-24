@@ -87,15 +87,12 @@ function App() {
         name: input,
         key: input,
       }
-      console.log(e,columnIndex, task)
 
-      // columns[columnIndex].cards.push(task)
+      columns[columnIndex].cards.push(task)
 
       toggleModalAddTaskClick(e)
-
-      setColumns([
-        ...columns,
-      ]) 
+      setInput('')
+      console.log(input)
     }
 
     const createNewColumn = (e) => {
@@ -186,6 +183,7 @@ function App() {
                       addNewTaskModal={addNewTaskModal}
                       setaddNewTaskModal={setaddNewTaskModal}
                       onChange={onChange}
+                      input={input}
                     />
                   ))
                 }
