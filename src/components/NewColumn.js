@@ -8,7 +8,7 @@ export default ({
 }) => (
 
     <div className='addTask'>
-        <button onClick={e => toggleAddColumn(e)}>
+        <button className='btn addColumnButton' onClick={e => toggleAddColumn(e)}>
             Add Column
         </button>
         <div className="newTasks">

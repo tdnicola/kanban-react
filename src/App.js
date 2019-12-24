@@ -11,7 +11,7 @@ function App() {
   const [columns, setColumns] = useState(
       [
         {
-          name: 'Have not started',
+          name: 'ToDo',
           cards: [
             { name: 'card a'},
             { name: 'card d'},
@@ -41,7 +41,7 @@ function App() {
     const [input, setInput] = useState('')
     
 
-    const toggleModalAddClick = (e) => {
+    const toggleModalAddTaskClick = (e) => {
       e.preventDefault()
       setaddNewTaskModal(!addNewTaskModal)
     }
@@ -60,6 +60,7 @@ function App() {
       e.preventDefault()
       setaddNewColumnModal(!addNewColumnModal)
     }
+
     //starting to drag the task
     const onDragStart = (e, id, cardIndex, columnIndex) => {
       // console.log('dragstart', id, "card index:" + cardIndex)
@@ -79,15 +80,22 @@ function App() {
     }
 
     // inputting new task, takes onChange above
-    const createNewTask = (e) => {
+    const createNewTask = (e, columnIndex) => {
       e.preventDefault()
 
       let task = {
         name: input,
         key: input,
       }
-      columns[0].cards.push(task)
-      toggleModalAddClick(e)
+      console.log(e,columnIndex, task)
+
+      // columns[columnIndex].cards.push(task)
+
+      toggleModalAddTaskClick(e)
+
+      setColumns([
+        ...columns,
+      ]) 
     }
 
     const createNewColumn = (e) => {
@@ -150,13 +158,13 @@ function App() {
 
       {loginView && (
         <div className='loggedIn'>
-              <NewTask 
-                toggleModalAddClick={toggleModalAddClick}
+              {/* <NewTask 
+                toggleModalAddTaskClick={toggleModalAddTaskClick}
                 addNewTaskModal={addNewTaskModal}
                 setaddNewTaskModal={setaddNewTaskModal}
                 createNewTask={createNewTask}
                 onChange={onChange}
-              />
+              /> */}
               <NewColumn
                 toggleAddColumn={toggleAddColumn}
                 addNewColumnModal={addNewColumnModal}
@@ -172,8 +180,12 @@ function App() {
                       key={columnIndex} 
                       onDragStart={onDragStart}
                       onDragOver={onDragOver}
-                      toggleModalAddClick={toggleModalAddClick}
+                      toggleModalAddTaskClick={toggleModalAddTaskClick}
                       deleteColumn={deleteColumn}
+                      createNewTask={createNewTask}
+                      addNewTaskModal={addNewTaskModal}
+                      setaddNewTaskModal={setaddNewTaskModal}
+                      onChange={onChange}
                     />
                   ))
                 }

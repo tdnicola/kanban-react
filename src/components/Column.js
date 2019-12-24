@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card'
+import NewTask from './NewTask'
 
 export default ({ 
     column, 
@@ -8,6 +9,11 @@ export default ({
     onDragOver,
     onDrop,
     deleteColumn,
+    createNewTask,
+    toggleModalAddTaskClick,
+    addNewTaskModal,
+    setaddNewTaskModal,
+    onChange,
  }) => (
     <div 
         className='column' 
@@ -16,7 +22,7 @@ export default ({
     >
         <h2>
             {column.name}
-            <button onClick={e => deleteColumn(e, columnIndex)}>X</button>
+            <button className='btn deleteButton'onClick={e => deleteColumn(e, columnIndex)}>X</button>
 
         </h2>
         {column.cards.map((card, cardIndex) => (
@@ -28,5 +34,16 @@ export default ({
                 key={card.name}
             />
         ))}
+        
+        <NewTask 
+            toggleModalAddTaskClick={toggleModalAddTaskClick}
+            addNewTaskModal={addNewTaskModal}
+            setaddNewTaskModal={setaddNewTaskModal}
+            createNewTask={createNewTask}
+            onChange={onChange}
+            columnIndex={columnIndex}
+            column={column}
+            key={column}
+        />
     </div>
 )

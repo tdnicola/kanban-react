@@ -13,6 +13,44 @@ body {
   font-family: "Roboto"
 }
 
+.btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #2866ad;
+  border-radius: 0.6em;
+  color: #2866ad;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.addColumnButton {
+ justify-content: center;
+}
+
+.addTaskButton {
+  padding: .3em .8em;
+  margin: 5px;
+  font-size: .5rem;
+}
+
+.deleteButton {
+  padding: .3em .8em;
+  margin: 5px;
+  font-size: .5rem;
+  float: right;
+}
+
 .card {
   display: flex;
   background: #e6ecf0;
