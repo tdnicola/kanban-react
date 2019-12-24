@@ -9,6 +9,6 @@ export default ({
 
     <div className='addTask'>
         <input className={columnIndex} onChange={onChange} value={input} placeholder='New Task'></input>
-        <button onClick={e => createNewTask(e, columnIndex)}>Add New Task</button>
+        <button className='addTaskButton btn'onClick={e => createNewTask(e, columnIndex)}>></button>
     </div>
 )

@@ -15,6 +15,7 @@ export default ({
     setaddNewTaskModal,
     onChange,
     input,
+    deleteTask,
  }) => (
     <div 
         className='column' 
@@ -33,6 +34,8 @@ export default ({
                 columnIndex={columnIndex}
                 onDragStart={onDragStart}
                 key={card.name}
+                deleteTask={deleteTask}
+
             />
         ))}
         

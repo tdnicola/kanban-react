@@ -36,12 +36,22 @@ body {
 
 .addColumnButton {
  justify-content: center;
+ display: inline-block;
 }
 
 .addTaskButton {
   padding: .3em .8em;
   margin: 5px;
   font-size: .5rem;
+  display: inline-block;
+}
+
+.deleteTaskButton {
+  padding: .3em .8em;
+  margin: 5px;
+  font-size: .5rem;
+  border: none;
+  float: right;
 }
 
 .deleteButton {

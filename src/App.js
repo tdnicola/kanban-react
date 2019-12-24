@@ -95,6 +95,16 @@ function App() {
       console.log(input)
     }
 
+    const deleteTask =(e, columnIndex, cardIndex) => {
+      e.preventDefault()
+
+      columns[columnIndex].cards.splice(cardIndex,1)
+
+      setColumns([
+        ...columns,
+      ]) 
+    }
+
     const createNewColumn = (e) => {
       e.preventDefault()
 
@@ -107,6 +117,7 @@ function App() {
     }
 
     const deleteColumn =(e, columnIndex) => {
+      e.preventDefault()
       // let startingColumnIndex = e.dataTransfer.getData('startingColumnIndex')
       columns.splice(columnIndex, 1)
       // console.log(e, columnIndex)  
@@ -184,6 +195,7 @@ function App() {
                       setaddNewTaskModal={setaddNewTaskModal}
                       onChange={onChange}
                       input={input}
+                      deleteTask={deleteTask}
                     />
                   ))
                 }
