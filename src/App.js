@@ -33,7 +33,7 @@ function App() {
       ] 
     )
     
-    const [loginView, setLoginView] = useState(false)
+    const [loginView, setLoginView] = useState(true)
     const [registrationView, setRegistrationView] = useState(false)
     const [addNewTaskModal, setaddNewTaskModal] = useState(false)
     const [addNewColumnModal, setaddNewColumnModal] = useState(false)
@@ -56,6 +56,10 @@ function App() {
       setRegistrationView(!registrationView)
     }
 
+    const toggleAddColumn = (e) => {
+      e.preventDefault()
+      setaddNewColumnModal(!addNewColumnModal)
+    }
     //starting to drag the task
     const onDragStart = (e, id, cardIndex, columnIndex) => {
       // console.log('dragstart', id, "card index:" + cardIndex)
@@ -63,7 +67,6 @@ function App() {
       e.dataTransfer.setData('cardIndex', cardIndex)
       e.dataTransfer.setData('startingColumnIndex', columnIndex)
       console.log("start ColumnIndex:" + columnIndex)
-
     }
 
     const onDragOver = (e) => {
@@ -73,7 +76,7 @@ function App() {
     //setting input state through NewTask.js to go through createNewTask below
     const onChange = (e) => {
       setInput(e.currentTarget.value);
-  }
+    }
 
     // inputting new task, takes onChange above
     const createNewTask = (e) => {
@@ -87,17 +90,25 @@ function App() {
       toggleModalAddClick(e)
     }
 
-    const createNewColumn =(e) => {
-
-    }
-
-    const deleteColumn =(e) => {
-      
-    }
-
-    const toggleAddColumn = (e) => {
+    const createNewColumn = (e) => {
       e.preventDefault()
-      setaddNewColumnModal(!addNewColumnModal)
+
+      let newColumn = {
+        name: input,
+        cards: []
+      }
+      columns.push(newColumn)
+      toggleAddColumn(e)
+    }
+
+    const deleteColumn =(e, columnIndex) => {
+      // let startingColumnIndex = e.dataTransfer.getData('startingColumnIndex')
+      columns.splice(columnIndex, 1)
+      // console.log(e, columnIndex)  
+
+      setColumns([
+        ...columns,
+      ]) 
     }
 
     //Dropping the draggable task to a different column pushing/splicing task
@@ -149,6 +160,8 @@ function App() {
               <NewColumn
                 toggleAddColumn={toggleAddColumn}
                 addNewColumnModal={addNewColumnModal}
+                createNewColumn={createNewColumn}
+                onChange={onChange}
               />
               <div className='columnGrid'>
                 {columns.map((column, columnIndex) => (
@@ -160,16 +173,11 @@ function App() {
                       onDragStart={onDragStart}
                       onDragOver={onDragOver}
                       toggleModalAddClick={toggleModalAddClick}
+                      deleteColumn={deleteColumn}
                     />
                   ))
                 }
               </div>
-              <button
-                onClick={(e) => toggleAddColumn(e)}
-              >
-                Add Column
-              </button>
-
         </div>
 
       )}

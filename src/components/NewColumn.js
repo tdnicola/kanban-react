@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default ({ 
-    createNewTask,
+    createNewColumn,
     toggleAddColumn,
     addNewColumnModal,
     onChange
@@ -18,7 +18,7 @@ export default ({
                     <div className='modal-main'>
                         column testing
                         <input onChange={onChange} placeholder='New Task'></input>
-                        <button onClick={e => createNewTask(e)}>Add New Task</button>
+                        <button onClick={e => createNewColumn(e)}>Add New Column</button>
                         <button onClick={e => toggleAddColumn(e)}>Close</button>
 
                     </div>

@@ -7,6 +7,7 @@ export default ({
     onDragStart,
     onDragOver,
     onDrop,
+    deleteColumn,
  }) => (
     <div 
         className='column' 
@@ -15,9 +16,7 @@ export default ({
     >
         <h2>
             {column.name}
-            <button>
-                X
-            </button>
+            <button onClick={e => deleteColumn(e, columnIndex)}>X</button>
 
         </h2>
         {column.cards.map((card, cardIndex) => (
