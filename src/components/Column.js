@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from './Card'
-import NewTask from './NewTask'
 
 export default ({ 
     column, 
@@ -13,6 +12,7 @@ export default ({
     onChange,
     input,
     deleteTask,
+    resetFormData,
  }) => (
     <div 
         className='column' 
@@ -35,11 +35,5 @@ export default ({
             />
         ))}
         
-        <NewTask 
-            createNewTask={createNewTask}
-            onChange={onChange}
-            columnIndex={columnIndex}
-            input={input}
-        />
     </div>
 )

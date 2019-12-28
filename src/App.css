@@ -112,6 +112,8 @@ input {
   border-color: grey;
   padding: 5px;
   border-radius: 5px;
+  width: 50%
+  /* display: flex; */
 }
 
 .loginView {

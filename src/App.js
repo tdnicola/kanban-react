@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Column from './components/Column';
 import LoginView from './components/LoginView';
 import NewColumn from './components/NewColumn';
+import NewTask from './components/NewTask';
 
 import './App.css';
 
@@ -50,6 +51,7 @@ function App() {
       setLoginView(!loginView)
     }
 
+
     const toggleRegistrationView = (e) => {
       e.preventDefault();
       setRegistrationView(!registrationView)
@@ -60,6 +62,9 @@ function App() {
       setaddNewColumnModal(!addNewColumnModal)
     }
 
+    const resetFormData =  () => {
+      document.getElementById("newTaskInput").reset();
+    }
     //starting to drag the task
     const onDragStart = (e, id, cardIndex, columnIndex) => {
       // console.log('dragstart', id, "card index:" + cardIndex)
@@ -79,7 +84,7 @@ function App() {
     }
 
     // inputting new task, takes onChange above
-    const createNewTask = (e, columnIndex) => {
+    const createNewTask = (e) => {
       e.preventDefault()
 
       let task = {
@@ -87,7 +92,7 @@ function App() {
         key: input,
       }
 
-      columns[columnIndex].cards.push(task)
+      columns[0].cards.push(task)
 
       toggleModalAddTaskClick(e)
       setInput('')
@@ -164,6 +169,12 @@ function App() {
       {loginView && (
         <div className='loggedIn'>
 
+              <NewTask 
+                createNewTask={createNewTask}
+                onChange={onChange}
+                input={input}
+                resetFormData={resetFormData}
+              />
               <NewColumn
                 toggleAddColumn={toggleAddColumn}
                 addNewColumnModal={addNewColumnModal}
@@ -184,6 +195,7 @@ function App() {
                       onChange={onChange}
                       input={input}
                       deleteTask={deleteTask}
+                      resetFormData={resetFormData}
                     />
                   ))
                 }
