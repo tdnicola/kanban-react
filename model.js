@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const KanBanTasksSchema = mongoose.Schema('tasksModel', {
-    name: String,
-    cards: Array,
-});
-
-const KanBanUserSchema = mongoose.Schema('userTasks', {
+const KanBanUserSchema = new Schema({
     username: { type: String, required: true},
     password: { type: String, required: true},
     email: { type: String, required: true},
@@ -13,8 +9,4 @@ const KanBanUserSchema = mongoose.Schema('userTasks', {
     cards: [],
 });
 
-const Task = mongoose.Model('Task', KanBanTasksSchema);
-const UserTasks = mongoose.Model('UserTasks', KanBanUserSchema);
-
-module.exports.Task = Task;
-module.exports.UserTasks = UserTasks;
+module.exports = mongoose.model('UserTask', KanBanUserSchema);
