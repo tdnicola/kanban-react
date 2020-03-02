@@ -5,8 +5,6 @@ const cors = require('cors');
 const Model = require('./model');
 
 const Users = Model.Users;
-const Tasks = Model.Tasks;
-const Cards = Model.Cards;
 
 const app = express();
 
@@ -44,32 +42,28 @@ app.post('/users', ((req, res) => {
         if (email) {
             res.status(400).send(req.body.email + ' Already Exists!' )
             console.log(req.body)
-        } else {
-            console.log(req.body)
+        } else {   
             Users
             .create({
                 Email: req.body.email,
                 Password: req.body.password,
-                // Tasks: 
-                //     [
-                //         {
-                //             "todo":[
-                //                 "start"
-                //             ]
-                //         },
-                //         {
-                //             "inprogress":[
-                //                 "moving along"
-                //             ]
-                //         },
-                //         {
-                //             "completed":[
-                //                 "done"
-                //             ]
-                //         }
-                //     ]
+                Tasks: 
+                    [
+                        {
+                            Card: "todo",
+                            Todo: ["start"]
+                        },
+                        {
+                            Card: "inprogress",
+                            Todo: ["moving along"]
+                        },
+                        {
+                            Card: "completed",
+                            Todo: ["done"]
+                        }
+                    ]
             })
-            .then((email) => {res.status(201).json(email) })
+            .then((user) => {res.status(201).json(user) })
             .catch((error) => {
                 console.error(error);
                 res.status(500).send('error: ' + error);
