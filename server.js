@@ -32,8 +32,8 @@ app.get('/users/:Email', (req, res) => {
     .catch((error) => {
         console.error(error);
         res.status(500).send("error " + error)
-    })
-})
+    });
+});
 
 //create user. gives default todo,inprogress,completed tasks for new user.
 app.post('/users', ((req, res) => {
@@ -76,7 +76,7 @@ app.post('/users', ((req, res) => {
 }));
 
 
-//update tasks by email
+//update account by email
 app.put('/tasks/:Email', (req, res) => {
     Users.updateOne({ Email: req.params.Email }, { $set : 
     {
@@ -94,6 +94,57 @@ app.put('/tasks/:Email', (req, res) => {
     });
 });
 
+//add tasks to user list
+//Need to try to aggregate possibly?
+app.post('/:_id/:Todo', (req, res) => {
+    Users.updateOne({ 'Tasks._id' : req.params._id}, { $push :
+    {
+        Todo: req.params.Todo
+    }})
+    .then((task) => {
+        console.log(req.params.Todo, req.params._id)
+        res.status(201).json(task)
+    })
+    .catch((error) => {
+        console.log(error);
+        res.status(500).send('error ' + error)
+    });
+});
+
+//Posting a new card
+app.post('/card/:_id/:Card', (req, res) => {
+    const newCard = {Card: req.params.Card};
+    const todo = {"Todo": ['hello']};
+
+    Users.updateOne({ _id : req.params._id}, { $push :
+    {
+        Tasks: newCard,
+    }},
+    {new: true})
+    .then((task) => {
+        console.log(task);
+        res.status(201).json(task)
+    })
+    .catch((error) => {
+        console.log(error);
+        res.status(500).send('error ' + error)
+    });
+});
+
+
+//getting one task by sub document id. TESTING
+app.get('/:_id', (req, res) => {
+    Users.find({ 'Tasks._id' : req.params._id})
+    .then((task) => {
+        res.status(201).json(task)
+    })
+    .catch((error) => {
+        res.status(500).send('error ' + error)
+    });
+});
+
+
 app.listen(3000, () => {
     console.log('Connected on port 3000')
 });
+
