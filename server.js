@@ -97,6 +97,8 @@ app.put('/tasks/:Email', (req, res) => {
 //add tasks to user list
 //Need to try to aggregate possibly?
 app.post('/:_id/:Todo', (req, res) => {
+    const newTask = {Todo: req.params.Todo}
+    
     Users.updateOne({ 'Tasks._id' : req.params._id}, { $push :
     {
         Todo: req.params.Todo
@@ -114,7 +116,6 @@ app.post('/:_id/:Todo', (req, res) => {
 //Posting a new card
 app.post('/card/:_id/:Card', (req, res) => {
     const newCard = {Card: req.params.Card};
-    const todo = {"Todo": ['hello']};
 
     Users.updateOne({ _id : req.params._id}, { $push :
     {

@@ -99,9 +99,13 @@ body {
   color: black;
   display: inline-block;
   margin: 10px;
+  margin-top: 15%;
   padding: 10px;
   width: 40%;
-  height: 40%;
+  /* clear: both; */
+  height: 200px;
+  /* height: 40%; */
+  /* position: absolute; */
 }
 
 .informationView {
@@ -124,6 +128,10 @@ input {
   /* display: flex; */
 }
 
+.loginText {
+  margin-top: 1em;
+}
+
 .loginView {
 
   display: flex;
@@ -136,6 +144,7 @@ input {
   /* width: 50%; */
 }
 
+
 .modal {
   position: fixed;
   top: 0;
@@ -146,11 +155,12 @@ input {
 }
 
 .modal-main {
+  padding-top: 50px;
   position:fixed;
   background: white;
-  width: 80%;
-  height: 50%;
-  top: 50%;
+  width: 60%;
+  height: 30%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%,-50%);
 }

@@ -16,9 +16,11 @@ export default ({
             {addNewColumnModal && (
                 <div className='modal'> 
                     <div className='modal-main'>
-                        column testing
-                        <input onChange={onChange} placeholder='New Task'></input>
+                        Add New Column
+                        <input onChange={onChange} placeholder='New Column'></input>
+                        <br></br>
                         <button onClick={e => createNewColumn(e)}>Add New Column</button>
+                        <br></br>
                         <button onClick={e => toggleAddColumn(e)}>Close</button>
 
                     </div>

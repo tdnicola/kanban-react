@@ -25,7 +25,7 @@ export default ({
                     <br></br>
                     <input placeholder='password'/>
                     <br></br>
-                    Please Login or Register
+                    <div className="loginText">Please Login or Register</div>
                     <button onClick={e => toggleLogin(e)}>Login</button>
                     <button onClick={e => toggleRegistrationView(e)}>Register</button>
                 </div>

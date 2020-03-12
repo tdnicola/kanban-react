@@ -118,6 +118,7 @@ function App() {
       }
       columns.push(newColumn)
       toggleAddColumn(e)
+        setInput('')
     }
 
     const deleteColumn =(e, columnIndex) => {
